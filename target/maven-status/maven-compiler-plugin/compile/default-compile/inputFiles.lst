@@ -1,0 +1,6 @@
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/UserApiApplication.java
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/controller/UserController.java
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/model/Country.java
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/model/User.java
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/repository/UserRepository.java
+/Users/polzovatel/user-api/src/main/java/com/example/user_api/service/UserService.java
