@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>User API</title>
+</head>
+<body>
+<h1>Пользователи</h1>
+
+<button onclick="loadUsers()">Загрузить всех пользователей</button>
+<br><br>
+
+<button onclick="loadByAge()">Пользователи возрастом от...</button>
+<label>Возраст от: <input type="number" id="ageFilterInput" value="30"></label>
+<br><br>
+
+<button onclick="addUser()">Добавить пользователя</button>
+<label>Имя: <input type="text" id="firstNameInput" placeholder="Имя"></label>
+<label>Возраст: <input type="number" id="ageInput" placeholder="Возраст"></label>
+<label>Страна: <input type="text" id="countryInput" placeholder="Страна (например, RUSSIA)"></label>
+<br><br>
+
+<pre id="output"></pre>
+
+<script>
+  function loadUsers() {
+    fetch('/user-api/v1/users')
+      .then(res => res.json())
+      .then(data => document.getElementById('output').textContent = JSON.stringify(data, null, 2))
+      .catch(err => alert('Ошибка загрузки пользователей'));
+  }
+
+  function loadByAge() {
+    const age = document.getElementById('ageFilterInput').value;
+    fetch('/user-api/v1/additional-info?age=' + encodeURIComponent(age))
+      .then(res => res.json())
+      .then(data => document.getElementById('output').textContent = JSON.stringify(data, null, 2))
+      .catch(err => alert('Ошибка загрузки по возрасту'));
+  }
+
+  function addUser() {
+    const firstName = document.getElementById('firstNameInput').value;
+    const age = document.getElementById('ageInput').value;
+    const country = document.getElementById('countryInput').value;
+
+    if (!firstName || !age || !country) {
+      alert('Пожалуйста, заполните все поля');
+      return;
+    }
+
+    fetch('/user-api/v1/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName, age: parseInt(age), country })
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Ошибка при добавлении');
+        return res.json();
+      })
+      .then(data => {
+        alert('Добавлен пользователь: ' + JSON.stringify(data));
+        loadUsers();
+      })
+      .catch(err => alert('Ошибка добавления пользователя: ' + err));
+  }
+</script>
+</body>
+</html>

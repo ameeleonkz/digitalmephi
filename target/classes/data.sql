@@ -3,3 +3,4 @@ INSERT INTO users (first_name, age, country) VALUES ('Bruno', 30, 'BRAZIL');
 INSERT INTO users (first_name, age, country) VALUES ('Carla', 28, 'FRANCE');
 INSERT INTO users (first_name, age, country) VALUES ('Dieter', 35, 'GERMANY');
 INSERT INTO users (first_name, age, country) VALUES ('Eiko', 40, 'JAPAN');
+INSERT INTO users (first_name, age, country) VALUES ('Ivan', 40, 'RUSSIA');
